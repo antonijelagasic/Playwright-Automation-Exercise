@@ -45,6 +45,9 @@ export class SignUpLogin {
     get signUpButton(){
         return this.page.locator('[data-qa="signup-button"]')
     }
+    get emailExsistNotification(){
+        return this.page.locator('.signup-form p')
+    }
     //SIGN UP DETAILS
     get genderCheckbox(){
         return this.page.locator('#id_gender2')

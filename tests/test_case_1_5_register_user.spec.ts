@@ -46,6 +46,25 @@ test('register user', async ({page}) => {
     expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
 })
 
+test.only('Register User with existing email', async ({page}) => {
+    const homepage = new Homepage(page)
+    const signUpLoginPage = new SignUpLogin(page)
+    const user_ana = testData.user
+
+    await page.goto('/')
+    expect(await homepage.logo.isVisible()).toBeTruthy()
+    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    await homepage.signUpLoginButton.click()
+    expect(page.url()).toBe('https://www.automationexercise.com/login')
+    expect(await signUpLoginPage.signUpForm.isVisible()).toBeTruthy()
+    await signUpLoginPage.signUpNameField.fill(user_ana.name)
+    await signUpLoginPage.signUpEmailField.fill(user_ana.email)
+    await signUpLoginPage.signUpButton.click()
+
+    expect(await signUpLoginPage.emailExsistNotification.isVisible()).toBeTruthy()
+
+})
+
 test.skip('delete account', async ({page}) => {
     const homepage = new Homepage(page)
     const signUpLoginPage = new SignUpLogin(page)
