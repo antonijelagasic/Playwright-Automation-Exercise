@@ -41,12 +41,31 @@ test('register user', async ({page}) => {
     expect (await signUpLoginPage.notificationSuccess.isVisible()).toBeTruthy()
     expect(page.url()).toBe('https://www.automationexercise.com/account_created')
     await signUpLoginPage.continueButton.click()
-    await expect(await signUpLoginPage.loggedInAs).toBeVisible()
+    await expect(signUpLoginPage.loggedInAs).toBeVisible()
+    const expectedText = `Logged in as ${user_ana.name}`
+    expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
+})
+
+test.skip('delete account', async ({page}) => {
+    const homepage = new Homepage(page)
+    const signUpLoginPage = new SignUpLogin(page)
+    const user_ana = testData.user
+
+    await page.goto('/')
+    expect(await homepage.logo.isVisible()).toBeTruthy()
+    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    await homepage.signUpLoginButton.click()
+    expect(page.url()).toBe('https://www.automationexercise.com/login')
+    expect(await signUpLoginPage.loginForm.isVisible()).toBeTruthy()
+    await signUpLoginPage.emailLoginField.fill(user_ana.email)
+    await signUpLoginPage.passwordLoginField.fill(user_ana.password)
+    await signUpLoginPage.loginButton.click()
+
+    await expect(signUpLoginPage.loggedInAs).toBeVisible()
     const expectedText = `Logged in as ${user_ana.name}`
     expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
     await signUpLoginPage.deleteAccountButton.click()
     expect (await signUpLoginPage.accountDeletedNotification.isVisible()).toBeTruthy()
-    await signUpLoginPage.continueButton.click()
 })
 
 

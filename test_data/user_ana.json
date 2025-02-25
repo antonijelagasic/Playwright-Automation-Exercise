@@ -15,6 +15,8 @@
         "state": "California",
         "city": "Los Angeles",
         "zipCode": "90000",
-        "mobileNumber": "0123456789"
+        "mobileNumber": "0123456789",
+        "invalidEmail": "innvalidemail@gmail.com",
+        "invalidPassword": "qifyg87rt3"
     }
 }

@@ -23,6 +23,12 @@ export class SignUpLogin {
     get loginButton(){
         return this.page.locator('[data-qa="login-button"]')
     }
+    get incorrectNotification(){
+        return this.page.locator('.login-form p')
+    }
+    get logoutButton(){
+        return this.page.locator('[href="/logout"]')
+    }
     //SIGN UP
     get signUpForm(){
         return this.page.locator('.signup-form')
