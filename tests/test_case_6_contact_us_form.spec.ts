@@ -23,5 +23,4 @@ test('verify sending contact us form', async({page}) => {
     await contactUsPage.uploadButton.setInputFiles(filePath)
     await contactUsPage.submitButton.click()
 
-git a
 })
