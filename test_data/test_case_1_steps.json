@@ -1,0 +1,20 @@
+{
+    "step1": "Launch browser",
+    "step2": "Navigate to url 'http://automationexercise.com'",
+    "step3": "Verify that home page is visible successfully",
+    "step4": "Click on 'Signup / Login' button",
+    "step5": "Verify 'New User Signup!' is visible",
+    "step6": "Enter name and email address",
+    "step7": "Click 'Signup' button",
+    "step8": "Verify that 'ENTER ACCOUNT INFORMATION' is visible",
+    "step9": "Fill details: Title, Name, Email, Password, Date of birth",
+    "step10": "Select checkbox 'Sign up for our newsletter!'",
+    "step11": "Select checkbox 'Receive special offers from our partners!'",
+    "step12": "Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number",
+    "step13": "Click 'Create Account button'",
+    "step14": "Verify that 'ACCOUNT CREATED!' is visible",
+    "step15": "Click 'Continue' button",
+    "step16": "Verify that 'Logged in as username' is visible",
+    "step17": "Click 'Delete Account' button",
+    "step18": "Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button"
+}
