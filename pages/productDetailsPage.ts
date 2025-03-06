@@ -26,5 +26,13 @@ export class ProductDetails {
         return this.page.locator('.product-information p').filter({hasText: 'Brand'})
     }    
 
-
+    get quantityField(){
+        return this.page.locator('#quantity')
+    }
+    get addToCartButton(){
+        return this.page.locator('.btn-default.cart')
+    }
+    get viewCartButton(){
+        return this.page.locator('.modal-content [href="/view_cart"]')
+    }
 }

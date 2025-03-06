@@ -7,6 +7,25 @@ export class Products {
         this.page = page
     }
 
+    get product(){
+        return this.page.locator('.productinfo')
+    }
+    get productPrice(){
+        return this.page.locator('.productinfo h2')
+    }
+    get productName(){
+        return this.page.locator('.productinfo p')
+    }
+    get addToCartHoverButton(){
+        return this.page.locator('.overlay-content .add-to-cart')
+    }
+    get continueShoppingButton(){
+        return this.page.locator('.btn-success')
+    }
+    get viewCartButton(){
+        return this.page.locator('.modal-body [href="/view_cart"]')
+    }
+
     get allProductsTitle(){
         return this.page.locator('h2.title.text-center')
     }
