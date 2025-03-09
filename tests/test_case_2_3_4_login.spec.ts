@@ -14,7 +14,7 @@ test('Login User with correct email and password', async ({page}) => {
     await homepage.signUpLoginButton.click()
     expect(page.url()).toBe('https://www.automationexercise.com/login')
     expect(await signUpLoginPage.loginForm.isVisible()).toBeTruthy()
-    await signUpLoginPage.emailLoginField.fill(user_ana.email)
+    await signUpLoginPage.emailLoginField.fill(user_ana.loginEmail)
     await signUpLoginPage.passwordLoginField.fill(user_ana.password)
     await signUpLoginPage.loginButton.click()
 
@@ -51,7 +51,7 @@ test('Logout User', async ({page}) => {
     await homepage.signUpLoginButton.click()
     expect(page.url()).toBe('https://www.automationexercise.com/login')
     expect(await signUpLoginPage.loginForm.isVisible()).toBeTruthy()
-    await signUpLoginPage.emailLoginField.fill(user_ana.email)
+    await signUpLoginPage.emailLoginField.fill(user_ana.loginEmail)
     await signUpLoginPage.passwordLoginField.fill(user_ana.password)
     await signUpLoginPage.loginButton.click()
 

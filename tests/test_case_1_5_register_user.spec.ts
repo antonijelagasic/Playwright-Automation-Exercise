@@ -3,6 +3,7 @@ import { Homepage } from '../pages/homepage'
 import { SignUpLogin } from '../pages/singUpLoginPage'
 import * as testData from '../test_data/user_ana.json'
 
+test.describe.serial('User registartion flow', () => {
 test('register user', async ({page}) => {
     const homepage = new Homepage(page)
     const signUpLoginPage = new SignUpLogin(page)
@@ -36,7 +37,7 @@ test('register user', async ({page}) => {
     await signUpLoginPage.stateField.fill(user_ana.state)
     await signUpLoginPage.cityField.fill(user_ana.city)
     await signUpLoginPage.zipCodeField.fill(user_ana.zipCode)
-    await signUpLoginPage.mobileNumberField.fill(user_ana.password)
+    await signUpLoginPage.mobileNumberField.fill(user_ana.mobileNumber)
     await signUpLoginPage.createAccountButton.click()
     expect (await signUpLoginPage.notificationSuccess.isVisible()).toBeTruthy()
     expect(page.url()).toBe('https://www.automationexercise.com/account_created')
@@ -46,7 +47,7 @@ test('register user', async ({page}) => {
     expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
 })
 
-test.only('Register User with existing email', async ({page}) => {
+test('Register User with existing email', async ({page}) => {
     const homepage = new Homepage(page)
     const signUpLoginPage = new SignUpLogin(page)
     const user_ana = testData.user
@@ -58,14 +59,14 @@ test.only('Register User with existing email', async ({page}) => {
     expect(page.url()).toBe('https://www.automationexercise.com/login')
     expect(await signUpLoginPage.signUpForm.isVisible()).toBeTruthy()
     await signUpLoginPage.signUpNameField.fill(user_ana.name)
-    await signUpLoginPage.signUpEmailField.fill(user_ana.email)
+    await signUpLoginPage.signUpEmailField.fill(user_ana.loginEmail)
     await signUpLoginPage.signUpButton.click()
 
     expect(await signUpLoginPage.emailExsistNotification.isVisible()).toBeTruthy()
 
 })
 
-test.skip('delete account', async ({page}) => {
+test('delete account', async ({page}) => {
     const homepage = new Homepage(page)
     const signUpLoginPage = new SignUpLogin(page)
     const user_ana = testData.user
@@ -88,4 +89,4 @@ test.skip('delete account', async ({page}) => {
 })
 
 
-
+})

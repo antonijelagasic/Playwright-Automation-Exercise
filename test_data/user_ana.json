@@ -2,6 +2,7 @@
     "user": {
         "name": "Ana",
         "email": "ana.qa.tester@outlook.com",
+        "loginEmail": "ana.qa@gmail.com",
         "password": "1234567",
         "day": "2",
         "month": "7",
@@ -17,6 +18,11 @@
         "zipCode": "90000",
         "mobileNumber": "0123456789",
         "invalidEmail": "innvalidemail@gmail.com",
-        "invalidPassword": "qifyg87rt3"
+        "invalidPassword": "qifyg87rt3",
+        "cardName": "Ana Gasic",
+        "cardNumber": "1111222233334444",
+        "cvc": "311",
+        "expirationMonth": "07",
+        "expirationYear": "2030"
     }
 }
