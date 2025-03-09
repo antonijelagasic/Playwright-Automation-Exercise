@@ -138,7 +138,6 @@ test('Place Order: Register before Checkout', async({page})=>{
     expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
 
     await homepage.productsButton.click()
-
     await productsPage.product.first().hover()
     await productsPage.addToCartHoverButton.first().click()
     await productsPage.continueShoppingButton.click()
@@ -176,5 +175,63 @@ test('Place Order: Register before Checkout', async({page})=>{
 
     await signUpLoginPage.deleteAccountButton.click()
     expect (await signUpLoginPage.accountDeletedNotification.isVisible()).toBeTruthy()
+})
+
+test('Place Order: Login before Checkout', async({page})=>{
+    const homepage = new Homepage(page)
+    const signUpLoginPage = new SignUpLogin(page)
+    const productsPage = new Products(page)
+    const cartPage = new Cart(page)
+    const user_ana = testData.user
+
+    await page.goto('/')
+    expect(await homepage.logo.isVisible()).toBeTruthy()
+    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    await homepage.signUpLoginButton.click()
+    expect(page.url()).toBe('https://www.automationexercise.com/login')
+    expect(await signUpLoginPage.loginForm.isVisible()).toBeTruthy()
+    await signUpLoginPage.emailLoginField.fill(user_ana.loginEmail)
+    await signUpLoginPage.passwordLoginField.fill(user_ana.password)
+    await signUpLoginPage.loginButton.click()
+
+    await expect(signUpLoginPage.loggedInAs).toBeVisible()
+    const expectedText = `Logged in as ${user_ana.name}`
+    expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
+
+    await homepage.productsButton.click()
+    await productsPage.product.first().hover()
+    await productsPage.addToCartHoverButton.first().click()
+    await productsPage.continueShoppingButton.click()
+    await productsPage.product.nth(1).hover()
+    await productsPage.addToCartHoverButton.nth(1).click()
+
+    await homepage.cartButton.click()
+    expect(page.url()).toBe('https://www.automationexercise.com/view_cart')
+    await cartPage.checkoutButton.click()
+    expect(page.url()).toBe('https://www.automationexercise.com/checkout')
+    expect (await cartPage.nameDetails.textContent()).toContain(`${user_ana.firstName} ${user_ana.lastName}`)
+    expect (await cartPage.company.textContent()).toContain(`${user_ana.company}`)
+    expect (await cartPage.address1.textContent()).toContain(`${user_ana.address1}`)
+    expect (await cartPage.address2.textContent()).toContain(`${user_ana.address2}`)
+    const textContent = await cartPage.cityStateZipCode.textContent()
+    expect(textContent).toContain(user_ana.city)
+    expect(textContent).toContain(user_ana.state)
+    expect(textContent).toContain(user_ana.zipCode)
+    expect (await cartPage.country.textContent()).toContain(`${user_ana.country}`)
+    expect (await cartPage.phone.textContent()).toContain(`${user_ana.mobileNumber}`)
+    await cartPage.message.fill('Message for checkout.')
+    await cartPage.placeOrderButton.click()
+
+    expect(page.url()).toBe('https://www.automationexercise.com/payment')
+    expect(await cartPage.paymentInformationForm.isVisible()).toBeTruthy()
+    await cartPage.cardName.fill(user_ana.cardName)
+    await cartPage.cardNumber.fill(user_ana.cardNumber)
+    await cartPage.cvc.fill(user_ana.cvc)
+    await cartPage.expirationMonth.fill(user_ana.expirationMonth)
+    await cartPage.expirationYear.fill(user_ana.expirationYear)
+    await cartPage.confirmOrder.click()
+    
+    expect(page.url()).toContain('https://www.automationexercise.com/payment_done')
+    expect(await cartPage.orderNotification.textContent()).toBe('Congratulations! Your order has been confirmed!')
 
 })
