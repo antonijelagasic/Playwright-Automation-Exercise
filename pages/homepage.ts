@@ -13,6 +13,24 @@ export class Homepage {
     get navBar(){
         return this.page.locator('.navbar-nav')
     }
+    get categories(){
+        return this.page.locator('.left-sidebar h2').first()
+    }
+    get womanCategory(){
+        return this.page.locator('.category-products [href="#Women"]')
+    }
+    get womanCategoryOptions(){
+        return this.page.locator('#Women li a')
+    }
+    get categoryTitle(){
+        return this.page.locator('.features_items h2.title.text-center')
+    }
+    get manCategory(){
+        return this.page.locator('.category-products [href="#Men"]')
+    }
+    get manCategoryOptions(){
+        return this.page.locator('#Men li a')
+    }
     get productsButton(){
         return this.page.locator('[href="/products"]')
     }

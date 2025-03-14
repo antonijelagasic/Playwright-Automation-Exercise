@@ -7,6 +7,15 @@ export class Products {
         this.page = page
     }
 
+    get brandsSideBar(){
+        return this.page.locator('.brands_products')
+    }
+    get brandsList(){
+        return this.page.locator('.brands-name li a')
+    }
+    get brandTitle(){
+        return this.page.locator('.features_items h2.title')
+    }
     get product(){
         return this.page.locator('.productinfo')
     }
