@@ -56,6 +56,8 @@ export class Products {
     get submitSearch(){
         return this.page.locator('#submit_search')
     }
-
+    get searchedProductsTitle(){
+        return this.page.locator('.features_items h2.title')
+    }
 
 }
