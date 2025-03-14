@@ -233,5 +233,4 @@ test('Place Order: Login before Checkout', async({page})=>{
     
     expect(page.url()).toContain('https://www.automationexercise.com/payment_done')
     expect(await cartPage.orderNotification.textContent()).toBe('Congratulations! Your order has been confirmed!')
-
 })

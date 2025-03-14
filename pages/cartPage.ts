@@ -7,6 +7,9 @@ export class Cart{
         this.page = page
     }
 
+    get removeProductButton(){
+        return this.page.locator('.cart_delete .fa-times')
+    }
     get name(){
         return this.page.locator('#cart_info_table h4 a')
     }
@@ -18,6 +21,9 @@ export class Cart{
     }
     get totalPrice(){
         return this.page.locator('#cart_info_table .cart_total_price')
+    }
+    get emptyCartNotification(){
+        return this.page.locator('#empty_cart p b')
     }
     get checkoutButton(){
         return this.page.locator('.check_out')
