@@ -25,6 +25,9 @@ export class Products {
     get productName(){
         return this.page.locator('.productinfo p')
     }
+    get addToCartButton(){
+        return this.page.locator('.productinfo .add-to-cart')
+    }
     get addToCartHoverButton(){
         return this.page.locator('.overlay-content .add-to-cart')
     }

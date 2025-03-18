@@ -2,7 +2,7 @@ import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
 import { Products } from '../pages/productsPage'
 
-test('Remove Products From Cart', async({page})=>{
+test('Search Products and Verify Cart After Login', async({page})=>{
     const homepage = new Homepage(page)
     const productsPage = new Products(page)
 
@@ -20,4 +20,17 @@ test('Remove Products From Cart', async({page})=>{
     titles.forEach(title => {
         expect(title.toLowerCase()).toContain('blue')
     })
+
+    const products = await productsPage.product.all()
+    for (const product of products){
+        await product.hover()
+        await page.waitForTimeout(500)
+        
+        const addToCartButton = product.locator(productsPage.addToCartHoverButton)
+        await addToCartButton.waitFor({ state: 'visible', timeout: 5000 })
+        await addToCartButton.click()
+
+        await productsPage.continueShoppingButton.click()
+    }
+    
 })
