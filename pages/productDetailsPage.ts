@@ -35,4 +35,22 @@ export class ProductDetails {
     get viewCartButton(){
         return this.page.locator('.modal-content [href="/view_cart"]')
     }
+    get writeYourReviewTitle(){
+        return this.page.locator('[href="#reviews"]')
+    }
+    get nameField(){
+        return this.page.locator('#name')
+    }
+    get emailField(){
+        return this.page.locator('#email')
+    }
+    get reviewField(){
+        return this.page.locator('[name="review"]')
+    }
+    get submitReview(){
+        return this.page.locator('#button-review')
+    }
+    get reviewNotification(){
+        return this.page.locator('#review-form .alert-success')
+    }
 }
