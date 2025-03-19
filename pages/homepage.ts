@@ -73,5 +73,20 @@ export class Homepage {
     get footer(){
         return this.page.locator('#footer')
     }
+    get recommendedItemsSection(){
+        return this.page.locator('.recommended_items')
+    }
+    get recommendedItemsTitle(){
+        return this.page.locator('.recommended_items h2.title')
+    }
+    get addToCartRecommendedItem(){
+        return this.page.locator('.recommended_items .add-to-cart')
+    }
+    get viewCartButton(){
+        return this.page.locator('.modal-content [href="/view_cart"]')
+    }
+    get recommendedItemName(){
+        return this.page.locator('#recommended-item-carousel .productinfo p')
+    }
 
 }
