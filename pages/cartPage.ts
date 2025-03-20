@@ -133,6 +133,12 @@ export class Cart{
     get orderNotification(){
         return this.page.locator('#form p')
     }
+    get downloadInvoiceButton(){
+        return this.page.locator('.col-sm-offset-1 a').first()
+    }
+    get continueButton(){
+        return this.page.locator('.col-sm-offset-1 a').nth(1)
+    }
 
 
 }

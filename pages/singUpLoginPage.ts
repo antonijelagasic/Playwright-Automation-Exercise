@@ -124,6 +124,9 @@ export class SignUpLogin {
     get accountDeletedNotification(){
         return this.page.locator('[data-qa="account-deleted"]')
     }
+    get continueButtonAfterDeletingAccount(){
+        return this.page.locator('[data-qa="continue-button"]')
+    }
 
 
 }

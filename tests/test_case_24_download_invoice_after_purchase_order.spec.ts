@@ -105,4 +105,18 @@ test('Download Invoice after purchase order', async({page})=>{
     
     expect(page.url()).toContain('https://www.automationexercise.com/payment_done')
     expect(await cartPage.orderNotification.textContent()).toBe('Congratulations! Your order has been confirmed!')
+
+    const downloadPromise = page.waitForEvent('download')
+    await cartPage.downloadInvoiceButton.click()
+    const download = await downloadPromise
+    const suggestedFileName = await download.suggestedFilename()
+    const filePath = `./downloads/${suggestedFileName}`
+    await download.saveAs(filePath)
+    console.log(`Invoice downloaded successfully: ${filePath}`)
+
+    await cartPage.continueButton.click()
+
+    await signUpLoginPage.deleteAccountButton.click()
+    await signUpLoginPage.continueButtonAfterDeletingAccount.click()
+    
 })
