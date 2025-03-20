@@ -92,6 +92,16 @@ export class Cart{
     get phoneB(){
         return this.page.locator('#address_invoice .address_phone')
     }
+    //review your order
+    get reviewOrderSection(){
+        return this.page.locator('#cart_info')
+    }
+    get productNameCheckout(){
+        return this.page.locator('.cart_description a')
+    }
+    get productPriceCheckout(){
+        return this.page.locator('.cart_price p')
+    }
     //
     get message(){
         return this.page.locator('[name="message"]')
