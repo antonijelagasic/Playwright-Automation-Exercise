@@ -48,27 +48,51 @@ export class Cart{
     }
 
     //checkout
-    get nameDetails(){
+    //Delivery details
+    get nameDetailsD(){
         return this.page.locator('#address_delivery .address_firstname.address_lastname')
     }
-    get company(){
+    get companyD(){
         return this.page.locator('#address_delivery .address_address1').first()
     }
-    get address1(){
+    get address1D(){
         return this.page.locator('#address_delivery .address_address1').nth(1)
     }
-    get address2(){
+    get address2D(){
         return this.page.locator('#address_delivery .address_address1').nth(2)
     }
-    get cityStateZipCode(){
+    get cityStateZipCodeD(){
         return this.page.locator('#address_delivery .address_city')
     }
-    get country(){
+    get countryD(){
         return this.page.locator('#address_delivery .address_country_name')
     }
-    get phone(){
+    get phoneD(){
         return this.page.locator('#address_delivery .address_phone')
     }
+    //Biling details
+    get nameDetailsB(){
+        return this.page.locator('#address_invoice .address_firstname.address_lastname')
+    }
+    get companyB(){
+        return this.page.locator('#address_invoice .address_address1').first()
+    }
+    get address1B(){
+        return this.page.locator('#address_invoice .address_address1').nth(1)
+    }
+    get address2B(){
+        return this.page.locator('#address_invoice .address_address1').nth(2)
+    }
+    get cityStateZipCodeB(){
+        return this.page.locator('#address_invoice .address_city')
+    }
+    get countryB(){
+        return this.page.locator('#address_invoice .address_country_name')
+    }
+    get phoneB(){
+        return this.page.locator('#address_invoice .address_phone')
+    }
+    //
     get message(){
         return this.page.locator('[name="message"]')
     }
