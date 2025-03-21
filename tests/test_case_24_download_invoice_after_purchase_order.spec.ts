@@ -117,6 +117,5 @@ test('Download Invoice after purchase order', async({page})=>{
     await cartPage.continueButton.click()
 
     await signUpLoginPage.deleteAccountButton.click()
-    await signUpLoginPage.continueButtonAfterDeletingAccount.click()
-    
+    await signUpLoginPage.continueButtonAfterDeletingAccount.click()  
 })
