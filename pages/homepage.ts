@@ -88,5 +88,11 @@ export class Homepage {
     get recommendedItemName(){
         return this.page.locator('#recommended-item-carousel .productinfo p')
     }
+    get scrollUpArrow(){
+        return this.page.locator('#scrollUp')
+    }
+    get carouselTitle(){
+        return this.page.locator('.carousel-inner h2')
+    }
 
 }
