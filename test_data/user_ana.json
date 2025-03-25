@@ -1,5 +1,6 @@
 {
     "user": {
+        "title": "Mrs.",
         "name": "Ana",
         "email": "ana.qa.tester@outlook.com",
         "loginEmail": "ana.qa@gmail.com",
@@ -23,6 +24,7 @@
         "cardNumber": "1111222233334444",
         "cvc": "311",
         "expirationMonth": "07",
-        "expirationYear": "2030"
+        "expirationYear": "2030",
+        "reviewText": "Review text for testing"
     }
 }

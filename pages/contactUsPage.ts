@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test"
 
-export class ContactUs {
+export class ContactUsPage {
     page: Page
 
     constructor (page: Page){

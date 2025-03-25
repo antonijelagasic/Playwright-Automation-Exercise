@@ -1,12 +1,12 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Products } from '../pages/productsPage'
-import { ProductDetails } from '../pages/productDetailsPage'
+import { ProductsPage } from '../pages/productsPage'
+import { ProductDetailsPage } from '../pages/productDetailsPage'
 
 test('Verify All Products and product detail page', async ({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const productDetailsPage = new ProductDetails(page)
+    const productsPage = new ProductsPage(page)
+    const productDetailsPage = new ProductDetailsPage(page)
 
     await page.goto('/')
     expect(await homepage.logo.isVisible()).toBeTruthy()
@@ -28,9 +28,9 @@ test('Verify All Products and product detail page', async ({page})=>{
     expect (await productDetailsPage.brand.isVisible()).toBeTruthy()
 })
 
-test('Search Product', async({page})=>{
+test.only('Search Product', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
+    const productsPage = new ProductsPage(page)
 
     await page.goto('/')
     expect(await homepage.logo.isVisible()).toBeTruthy()
@@ -40,8 +40,7 @@ test('Search Product', async({page})=>{
     expect(await productsPage.allProductsTitle.isVisible()).toBeTruthy()
     expect(await productsPage.productsList.count()).toBeGreaterThan(0)
 
-    await productsPage.searchField.fill('Winter')
-    await productsPage.submitSearch.click()
+    await productsPage.searchProductsByText('Winter')
     const titles = await productsPage.productTitle.allTextContents()
     titles.forEach(title => {
         expect(title).toContain('Winter')

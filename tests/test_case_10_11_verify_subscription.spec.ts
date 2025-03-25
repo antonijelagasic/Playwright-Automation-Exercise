@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Cart } from '../pages/cartPage'
+import { CartPage } from '../pages/cartPage'
 import * as testData from '../test_data/user_ana.json'
 
 test('Verify Subscription in home page', async({page})=>{
@@ -20,7 +20,7 @@ test('Verify Subscription in home page', async({page})=>{
 
 test.only('Verify Subscription in Cart page', async({page})=>{
     const homepage = new Homepage(page)
-    const cartPage = new Cart(page)
+    const cartPage = new CartPage(page)
     const user_ana = testData.user
 
     await page.goto('/')

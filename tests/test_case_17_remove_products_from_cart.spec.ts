@@ -1,12 +1,12 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Products } from '../pages/productsPage'
-import { Cart } from '../pages/cartPage'
+import { ProductsPage } from '../pages/productsPage'
+import { CartPage } from '../pages/cartPage'
 
 test('Remove Products From Cart', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const cartPage = new Cart(page)
+    const productsPage = new ProductsPage(page)
+    const cartPage = new CartPage(page)
 
     await page.goto('/')
     expect(await homepage.logo.isVisible()).toBeTruthy()
@@ -30,8 +30,8 @@ test('Remove Products From Cart', async({page})=>{
 
 test('Remove all products from the cart', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const cartPage = new Cart(page)
+    const productsPage = new ProductsPage(page)
+    const cartPage = new CartPage(page)
 
     await page.goto('/')
     expect(await homepage.logo.isVisible()).toBeTruthy()
@@ -46,9 +46,7 @@ test('Remove all products from the cart', async({page})=>{
 
     await homepage.cartButton.click()
     expect(page.url()).toBe('https://www.automationexercise.com/view_cart')
-    const removeButtons = await cartPage.removeProductButton.all()
-    for(let i = 0; i < removeButtons.length; i++){
-        await removeButtons[i].click()
-    }
+
+    await cartPage.removeAllProducts()
     expect(await cartPage.emptyCartNotification.textContent()).toBe('Cart is empty!')
 })

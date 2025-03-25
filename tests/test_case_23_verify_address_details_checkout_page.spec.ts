@@ -1,15 +1,15 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Products } from '../pages/productsPage'
-import { Cart } from '../pages/cartPage'
-import { SignUpLogin } from '../pages/singUpLoginPage'
+import { ProductsPage } from '../pages/productsPage'
+import { CartPage } from '../pages/cartPage'
+import { AuthPage } from '../pages/authPage'
 import * as testData from '../test_data/user_ana.json'
 
 test('Verify address details in checkout page', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const cartPage = new Cart(page)
-    const signUpLoginPage = new SignUpLogin(page)
+    const productsPage = new ProductsPage(page)
+    const cartPage = new CartPage(page)
+    const authPage = new AuthPage(page)
     const user_ana = testData.user
 
     await page.goto('/')
@@ -17,37 +17,37 @@ test('Verify address details in checkout page', async({page})=>{
     expect(await homepage.navBar.isVisible()).toBeTruthy()
     await homepage.signUpLoginButton.click()
     expect(page.url()).toBe('https://www.automationexercise.com/login')
-    expect(await signUpLoginPage.signUpForm.isVisible()).toBeTruthy()
-    await signUpLoginPage.signUpNameField.fill(user_ana.name)
-    await signUpLoginPage.signUpEmailField.fill(user_ana.email)
-    await signUpLoginPage.signUpButton.click()
+    expect(await authPage.signUpForm.isVisible()).toBeTruthy()
+    await authPage.signUpNameField.fill(user_ana.name)
+    await authPage.signUpEmailField.fill(user_ana.email)
+    await authPage.signUpButton.click()
 
-    await signUpLoginPage.genderCheckbox.check()
-    await expect(signUpLoginPage.nameField).toHaveValue(user_ana.name)
-    await expect(signUpLoginPage.emailField).toHaveValue(user_ana.email)
-    await signUpLoginPage.passwordField.fill(user_ana.password)
-    await signUpLoginPage.dayDropdown.selectOption(user_ana.day)
-    await signUpLoginPage.monthDropdown.selectOption(user_ana.month)
-    await signUpLoginPage.yearDropdown.selectOption(user_ana.year)
-    await signUpLoginPage.newsletterCheckbox.check()
-    await signUpLoginPage.offersCheckbox.check()
-    await signUpLoginPage.firstNameField.fill(user_ana.firstName)
-    await signUpLoginPage.lastNameField.fill(user_ana.lastName)
-    await signUpLoginPage.companyField.fill(user_ana.company)
-    await signUpLoginPage.address1Field.fill(user_ana.address1)
-    await signUpLoginPage.address2Field.fill(user_ana.address2)
-    await signUpLoginPage.countryDropdown.selectOption(user_ana.country)
-    await signUpLoginPage.stateField.fill(user_ana.state)
-    await signUpLoginPage.cityField.fill(user_ana.city)
-    await signUpLoginPage.zipCodeField.fill(user_ana.zipCode)
-    await signUpLoginPage.mobileNumberField.fill(user_ana.mobileNumber)
-    await signUpLoginPage.createAccountButton.click()
-    expect (await signUpLoginPage.notificationSuccess.isVisible()).toBeTruthy()
+    await authPage.genderCheckbox.check()
+    await expect(authPage.nameField).toHaveValue(user_ana.name)
+    await expect(authPage.emailField).toHaveValue(user_ana.email)
+    await authPage.passwordField.fill(user_ana.password)
+    await authPage.dayDropdown.selectOption(user_ana.day)
+    await authPage.monthDropdown.selectOption(user_ana.month)
+    await authPage.yearDropdown.selectOption(user_ana.year)
+    await authPage.newsletterCheckbox.check()
+    await authPage.offersCheckbox.check()
+    await authPage.firstNameField.fill(user_ana.firstName)
+    await authPage.lastNameField.fill(user_ana.lastName)
+    await authPage.companyField.fill(user_ana.company)
+    await authPage.address1Field.fill(user_ana.address1)
+    await authPage.address2Field.fill(user_ana.address2)
+    await authPage.countryDropdown.selectOption(user_ana.country)
+    await authPage.stateField.fill(user_ana.state)
+    await authPage.cityField.fill(user_ana.city)
+    await authPage.zipCodeField.fill(user_ana.zipCode)
+    await authPage.mobileNumberField.fill(user_ana.mobileNumber)
+    await authPage.createAccountButton.click()
+    expect (await authPage.notificationSuccess.isVisible()).toBeTruthy()
     expect(page.url()).toBe('https://www.automationexercise.com/account_created')
-    await signUpLoginPage.continueButton.click()
-    await expect(signUpLoginPage.loggedInAs).toBeVisible()
+    await authPage.continueButton.click()
+    await expect(authPage.loggedInAs).toBeVisible()
     const expectedText = `Logged in as ${user_ana.name}`
-    expect(await signUpLoginPage.loggedInAs.textContent()).toContain(expectedText)
+    expect(await authPage.loggedInAs.textContent()).toContain(expectedText)
 
     await homepage.productsButton.click()
     await productsPage.product.first().hover()
@@ -83,6 +83,6 @@ test('Verify address details in checkout page', async({page})=>{
     expect (await cartPage.countryB.textContent()).toContain(`${user_ana.country}`)
     expect (await cartPage.phoneB.textContent()).toContain(`${user_ana.mobileNumber}`)
 
-    await signUpLoginPage.deleteAccountButton.click()
-    expect (await signUpLoginPage.accountDeletedNotification.isVisible()).toBeTruthy()   
+    await authPage.deleteAccountButton.click()
+    expect (await authPage.accountDeletedNotification.isVisible()).toBeTruthy()   
 })

@@ -1,13 +1,13 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Products } from '../pages/productsPage'
-import { ProductDetails } from '../pages/productDetailsPage'
-import { Cart } from '../pages/cartPage'
+import { ProductsPage } from '../pages/productsPage'
+import { ProductDetailsPage } from '../pages/productDetailsPage'
+import { CartPage } from '../pages/cartPage'
 
 test('Add Products in Cart', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const cartPage = new Cart(page)
+    const productsPage = new ProductsPage(page)
+    const cartPage = new CartPage(page)
 
     await page.goto('/')
     expect(await homepage.logo.isVisible()).toBeTruthy()
@@ -40,11 +40,11 @@ test('Add Products in Cart', async({page})=>{
     expect(await cartPage.quantity.nth(1).textContent()).toBe('1')
 })
 
-test.only('Verify Product quantity in Cart', async({page})=>{
+test('Verify Product quantity in Cart', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const productDetailsPage = new ProductDetails(page)
-    const cartPage = new Cart(page)
+    const productsPage = new ProductsPage(page)
+    const productDetailsPage = new ProductDetailsPage(page)
+    const cartPage = new CartPage(page)
 
     await page.goto('/')
     expect(await homepage.logo.isVisible()).toBeTruthy()

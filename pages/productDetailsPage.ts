@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test"
 
-export class ProductDetails {
+export class ProductDetailsPage {
     page: Page
 
     constructor(page: Page){
@@ -52,5 +52,13 @@ export class ProductDetails {
     }
     get reviewNotification(){
         return this.page.locator('#review-form .alert-success')
+    }
+
+    //
+    async addReview(name: string, email: string, review: string): Promise<void>{
+        await this.nameField.fill(name)
+        await this.emailField.fill(email)
+        await this.reviewField.fill(review)
+        await this.submitReview.click()
     }
 }

@@ -1,12 +1,15 @@
 import { Page } from "@playwright/test"
 
-export class Cart{
+export class CartPage{
     page: Page
 
     constructor(page: Page){
         this.page = page
     }
 
+    get cartItem(){
+        return this.page.locator('.cart_product')
+    }
     get removeProductButton(){
         return this.page.locator('.cart_delete .fa-times')
     }
@@ -102,7 +105,7 @@ export class Cart{
     get productPriceCheckout(){
         return this.page.locator('.cart_price p')
     }
-    //
+    //place order
     get message(){
         return this.page.locator('[name="message"]')
     }
@@ -138,6 +141,14 @@ export class Cart{
     }
     get continueButton(){
         return this.page.locator('.col-sm-offset-1 a').nth(1)
+    }
+
+    //
+    async removeAllProducts(): Promise<void> {
+        const removeButtons = await this.removeProductButton.all()
+        for(let i = 0; i < removeButtons.length; i++){
+            await removeButtons[i].click()
+        }
     }
 
 

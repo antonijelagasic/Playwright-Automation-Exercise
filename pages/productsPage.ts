@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test"
 
-export class Products {
+export class ProductsPage {
     page: Page
 
     constructor(page: Page){
@@ -17,16 +17,16 @@ export class Products {
         return this.page.locator('.features_items h2.title')
     }
     get product(){
-        return this.page.locator('.productinfo')
+        return this.page.locator('.single-products')
     }
     get productPrice(){
-        return this.page.locator('.productinfo h2')
+        return this.page.locator('.single-products .productinfo h2')
     }
     get productName(){
-        return this.page.locator('.productinfo p')
+        return this.page.locator('.single-products .productinfo p')
     }
     get addToCartButton(){
-        return this.page.locator('.productinfo .add-to-cart')
+        return this.page.locator('.single-products .productinfo .add-to-cart')
     }
     get addToCartHoverButton(){
         return this.page.locator('.overlay-content .add-to-cart')
@@ -61,6 +61,12 @@ export class Products {
     }
     get searchedProductsTitle(){
         return this.page.locator('.features_items h2.title')
+    }
+
+    //
+    async searchProductsByText(text: string): Promise<void> {
+        await this.searchField.fill(text)
+        await this.submitSearch.click()
     }
 
 }

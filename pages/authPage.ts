@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test"
 
-export class SignUpLogin {
+export class AuthPage {
     page: Page
 
     constructor(page: Page){

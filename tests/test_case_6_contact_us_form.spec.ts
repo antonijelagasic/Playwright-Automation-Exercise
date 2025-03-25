@@ -1,12 +1,12 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { ContactUs } from '../pages/contactUsPage'
+import { ContactUsPage } from '../pages/contactUsPage'
 import * as testData from '../test_data/user_ana.json'
 import path from 'path'
 
 test('verify sending contact us form', async({page}) => {
     const homepage = new Homepage(page)
-    const contactUsPage = new ContactUs(page)
+    const contactUsPage = new ContactUsPage(page)
     const user_ana = testData.user
     const filePath = path.resolve(__dirname, '../test_data/test-image.jpg')
 

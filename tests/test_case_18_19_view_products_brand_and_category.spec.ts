@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Products } from '../pages/productsPage'
+import { ProductsPage } from '../pages/productsPage'
 
 test('View Category Products', async({page})=>{
     const homepage = new Homepage(page)
@@ -18,7 +18,7 @@ test('View Category Products', async({page})=>{
 
 test('View & Cart Brand Products', async({page})=>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
+    const productsPage = new ProductsPage(page)
 
     await page.goto('/')
     await homepage.productsButton.click()

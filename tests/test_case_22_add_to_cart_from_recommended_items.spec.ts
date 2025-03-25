@@ -1,10 +1,10 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Cart } from '../pages/cartPage'
+import { CartPage } from '../pages/cartPage'
 
 test('Add to cart from Recommended items', async({page})=>{
     const homepage = new Homepage(page)
-    const cartPage = new Cart(page)
+    const cartPage = new CartPage(page)
 
     await page.goto('/')
     await homepage.recommendedItemsSection.scrollIntoViewIfNeeded()

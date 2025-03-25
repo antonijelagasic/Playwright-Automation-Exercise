@@ -38,7 +38,7 @@ export class Homepage {
         return this.page.locator('[href="/view_cart"] .fa-shopping-cart')
     }
     get signUpLoginButton(){
-        return this.page.locator('[href="/login"]')
+        return this.page.locator('.nav [href="/login"]')
     }
     get testCaseButton(){
         return this.page.locator('[href="/test_cases"] .fa-list')

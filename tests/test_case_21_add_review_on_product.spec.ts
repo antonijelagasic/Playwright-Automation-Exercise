@@ -1,13 +1,13 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
-import { Products } from '../pages/productsPage'
-import { ProductDetails } from '../pages/productDetailsPage'
+import { ProductsPage } from '../pages/productsPage'
+import { ProductDetailsPage } from '../pages/productDetailsPage'
 import * as testData from '../test_data/user_ana.json'
 
 test('Add review on product', async({page}) =>{
     const homepage = new Homepage(page)
-    const productsPage = new Products(page)
-    const productDetailsPage = new ProductDetails(page)
+    const productsPage = new ProductsPage(page)
+    const productDetailsPage = new ProductDetailsPage(page)
     const user_ana = testData.user
 
     await page.goto('/')
@@ -17,9 +17,6 @@ test('Add review on product', async({page}) =>{
     await productsPage.viewProductButton.first().click()
 
     expect(await productDetailsPage.writeYourReviewTitle.isVisible()).toBeTruthy()
-    await productDetailsPage.nameField.fill(user_ana.name)
-    await productDetailsPage.emailField.fill(user_ana.email)
-    await productDetailsPage.reviewField.fill('Review text')
-    await productDetailsPage.submitReview.click()
+    await productDetailsPage.addReview(user_ana.name, user_ana.email, user_ana.reviewText)
     expect(await productDetailsPage.reviewNotification.isVisible()).toBeTruthy()
 })
