@@ -25,7 +25,6 @@ export class ProductDetailsPage {
     get brand(){
         return this.page.locator('.product-information p').filter({hasText: 'Brand'})
     }    
-
     get quantityField(){
         return this.page.locator('#quantity')
     }
@@ -60,5 +59,8 @@ export class ProductDetailsPage {
         await this.emailField.fill(email)
         await this.reviewField.fill(review)
         await this.submitReview.click()
+    }
+    async addProductToCartByQuantity(quantity: number): Promise<void>{
+        await this.quantityField.fill(quantity.toString())
     }
 }

@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test"
+import { TestUser } from '../test_data/TestUser'
 
 export class AuthPage {
     page: Page
@@ -128,5 +129,29 @@ export class AuthPage {
         return this.page.locator('[data-qa="continue-button"]')
     }
 
+    //SIGN UP METHOD
+    async signUp(user: TestUser){
+        await this.signUpNameField.fill(user.name)
+        await this.signUpEmailField.fill(user.email)
+        await this.signUpButton.click()
+        await this.genderCheckbox.check()
+        await this.passwordField.fill(user.password)
+        await this.dayDropdown.selectOption({ value: user.day })
+        await this.monthDropdown.selectOption({ value: user.month })
+        await this.yearDropdown.selectOption({ value: user.year })
+        await this.newsletterCheckbox.check()
+        await this.offersCheckbox.check()
+        await this.firstNameField.fill(user.firstName)
+        await this.lastNameField.fill(user.lastName)
+        await this.companyField.fill(user.company)
+        await this.address1Field.fill(user.address1)
+        await this.address2Field.fill(user.address2)
+        await this.countryDropdown.selectOption({ value: user.country })
+        await this.stateField.fill(user.state)
+        await this.cityField.fill(user.city)
+        await this.zipCodeField.fill(user.zipCode)
+        await this.mobileNumberField.fill(user.mobileNumber)
+        await this.createAccountButton.click()
+    }
 
 }

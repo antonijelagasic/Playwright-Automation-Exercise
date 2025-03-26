@@ -2,6 +2,9 @@ import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
 import { ProductsPage } from '../pages/productsPage'
 import { CartPage } from '../pages/cartPage'
+import { TRUE } from '../constants/helperConstants'
+import { CART_IS_EMPTY_NOTIFICATION } from '../constants/orderNotificationConstants'
+import { VIEW_CART_URL } from '../constants/urlsConstants'
 
 test('Remove Products From Cart', async({page})=>{
     const homepage = new Homepage(page)
@@ -9,8 +12,8 @@ test('Remove Products From Cart', async({page})=>{
     const cartPage = new CartPage(page)
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.productsButton.click()
 
     await productsPage.product.first().hover()
@@ -21,7 +24,7 @@ test('Remove Products From Cart', async({page})=>{
     await productsPage.addToCartHoverButton.nth(1).click()
 
     await homepage.cartButton.click()
-    expect(page.url()).toBe('https://www.automationexercise.com/view_cart')
+    expect(page.url()).toBe(VIEW_CART_URL)
     const firstProductCartName = await cartPage.name.first().textContent()
     expect (firstProductName).toBe(firstProductCartName)
     await cartPage.removeProductButton.first().click()
@@ -34,8 +37,8 @@ test('Remove all products from the cart', async({page})=>{
     const cartPage = new CartPage(page)
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.productsButton.click()
 
     await productsPage.product.first().hover()
@@ -45,8 +48,8 @@ test('Remove all products from the cart', async({page})=>{
     await productsPage.addToCartHoverButton.nth(1).click()
 
     await homepage.cartButton.click()
-    expect(page.url()).toBe('https://www.automationexercise.com/view_cart')
+    expect(page.url()).toBe(VIEW_CART_URL)
 
     await cartPage.removeAllProducts()
-    expect(await cartPage.emptyCartNotification.textContent()).toBe('Cart is empty!')
+    expect(await cartPage.emptyCartNotification.textContent()).toBe(CART_IS_EMPTY_NOTIFICATION)
 })

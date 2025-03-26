@@ -3,6 +3,7 @@ import { Homepage } from '../pages/homepage'
 import { ProductsPage } from '../pages/productsPage'
 import { ProductDetailsPage } from '../pages/productDetailsPage'
 import { CartPage } from '../pages/cartPage'
+import { TRUE } from '../constants/helperConstants'
 
 test('Add Products in Cart', async({page})=>{
     const homepage = new Homepage(page)
@@ -10,15 +11,13 @@ test('Add Products in Cart', async({page})=>{
     const cartPage = new CartPage(page)
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.productsButton.click()
 
-    await productsPage.product.first().hover()
-    await productsPage.addToCartHoverButton.first().click()
+    await productsPage.addToCartByNumber(0)
     await productsPage.continueShoppingButton.click()
-    await productsPage.product.nth(1).hover()
-    await productsPage.addToCartHoverButton.nth(1).click()
+    await productsPage.addToCartByNumber(1)
 
     const firstProductName = await productsPage.productName.first().textContent()
     const firstProductPrice = await productsPage.productPrice.first().textContent()
@@ -47,14 +46,13 @@ test('Verify Product quantity in Cart', async({page})=>{
     const cartPage = new CartPage(page)
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.productsButton.click()
     await productsPage.viewProductButton.first().click()
 
     expect(page.url()).toContain('https://www.automationexercise.com/product_details')
-    await productDetailsPage.quantityField.fill('4')
-    await productDetailsPage.addToCartButton.click()
+    await productDetailsPage.addProductToCartByQuantity(4)
     await productDetailsPage.addToCartButton.click()
     await productDetailsPage.viewCartButton.click()
 

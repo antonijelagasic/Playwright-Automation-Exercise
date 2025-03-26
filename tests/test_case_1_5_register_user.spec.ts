@@ -1,46 +1,28 @@
 import {test, expect} from '@playwright/test'
 import { Homepage } from '../pages/homepage'
 import { AuthPage } from '../pages/authPage'
+import { TRUE } from '../constants/helperConstants'
+import { LOGIN_URL, ACCOUNT_CREATED_URL } from '../constants/urlsConstants'
 import * as testData from '../test_data/user_ana.json'
+import { TestUser } from '../test_data/TestUser'
 
 test.describe.serial('User registartion flow', () => {
 test('register user', async ({page}) => {
     const homepage = new Homepage(page)
     const authPage = new AuthPage(page)
-    const user_ana = testData.user
+    const user_ana: TestUser = testData.user
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.signUpLoginButton.click()
-    expect(page.url()).toBe('https://www.automationexercise.com/login')
-    expect(await authPage.signUpForm.isVisible()).toBeTruthy()
-    await authPage.signUpNameField.fill(user_ana.name)
-    await authPage.signUpEmailField.fill(user_ana.email)
-    await authPage.signUpButton.click()
-
-    await authPage.genderCheckbox.check()
-    await expect(authPage.nameField).toHaveValue(user_ana.name)
-    await expect(authPage.emailField).toHaveValue(user_ana.email)
-    await authPage.passwordField.fill(user_ana.password)
-    await authPage.dayDropdown.selectOption(user_ana.day)
-    await authPage.monthDropdown.selectOption(user_ana.month)
-    await authPage.yearDropdown.selectOption(user_ana.year)
-    await authPage.newsletterCheckbox.check()
-    await authPage.offersCheckbox.check()
-    await authPage.firstNameField.fill(user_ana.firstName)
-    await authPage.lastNameField.fill(user_ana.lastName)
-    await authPage.companyField.fill(user_ana.company)
-    await authPage.address1Field.fill(user_ana.address1)
-    await authPage.address2Field.fill(user_ana.address2)
-    await authPage.countryDropdown.selectOption(user_ana.country)
-    await authPage.stateField.fill(user_ana.state)
-    await authPage.cityField.fill(user_ana.city)
-    await authPage.zipCodeField.fill(user_ana.zipCode)
-    await authPage.mobileNumberField.fill(user_ana.mobileNumber)
-    await authPage.createAccountButton.click()
-    expect (await authPage.notificationSuccess.isVisible()).toBeTruthy()
-    expect(page.url()).toBe('https://www.automationexercise.com/account_created')
+    expect(page.url()).toBe(LOGIN_URL)
+    expect(await authPage.signUpForm.isVisible()).toBe(TRUE)
+    
+    await authPage.signUp(user_ana)
+    
+    expect (await authPage.notificationSuccess.isVisible()).toBe(TRUE)
+    expect(page.url()).toBe(ACCOUNT_CREATED_URL)
     await authPage.continueButton.click()
     await expect(authPage.loggedInAs).toBeVisible()
     const expectedText = `Logged in as ${user_ana.name}`
@@ -53,16 +35,16 @@ test('Register User with existing email', async ({page}) => {
     const user_ana = testData.user
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.signUpLoginButton.click()
-    expect(page.url()).toBe('https://www.automationexercise.com/login')
-    expect(await authPage.signUpForm.isVisible()).toBeTruthy()
+    expect(page.url()).toBe(LOGIN_URL)
+    expect(await authPage.signUpForm.isVisible()).toBe(TRUE)
     await authPage.signUpNameField.fill(user_ana.name)
     await authPage.signUpEmailField.fill(user_ana.loginEmail)
     await authPage.signUpButton.click()
 
-    expect(await authPage.emailExsistNotification.isVisible()).toBeTruthy()
+    expect(await authPage.emailExsistNotification.isVisible()).toBe(TRUE)
 
 })
 
@@ -72,11 +54,11 @@ test('delete account', async ({page}) => {
     const user_ana = testData.user
 
     await page.goto('/')
-    expect(await homepage.logo.isVisible()).toBeTruthy()
-    expect(await homepage.navBar.isVisible()).toBeTruthy()
+    expect(await homepage.logo.isVisible()).toBe(TRUE)
+    expect(await homepage.navBar.isVisible()).toBe(TRUE)
     await homepage.signUpLoginButton.click()
-    expect(page.url()).toBe('https://www.automationexercise.com/login')
-    expect(await authPage.loginForm.isVisible()).toBeTruthy()
+    expect(page.url()).toBe(LOGIN_URL)
+    expect(await authPage.loginForm.isVisible()).toBe(TRUE)
     await authPage.emailLoginField.fill(user_ana.email)
     await authPage.passwordLoginField.fill(user_ana.password)
     await authPage.loginButton.click()
@@ -85,8 +67,7 @@ test('delete account', async ({page}) => {
     const expectedText = `Logged in as ${user_ana.name}`
     expect(await authPage.loggedInAs.textContent()).toContain(expectedText)
     await authPage.deleteAccountButton.click()
-    expect (await authPage.accountDeletedNotification.isVisible()).toBeTruthy()
+    expect (await authPage.accountDeletedNotification.isVisible()).toBe(TRUE)
 })
-
 
 })

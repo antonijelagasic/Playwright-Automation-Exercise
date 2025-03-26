@@ -29,7 +29,7 @@ export class ProductsPage {
         return this.page.locator('.single-products .productinfo .add-to-cart')
     }
     get addToCartHoverButton(){
-        return this.page.locator('.overlay-content .add-to-cart')
+        return this.page.locator('.single-products .overlay-content .add-to-cart')
     }
     get continueShoppingButton(){
         return this.page.locator('.btn-success')
@@ -67,6 +67,10 @@ export class ProductsPage {
     async searchProductsByText(text: string): Promise<void> {
         await this.searchField.fill(text)
         await this.submitSearch.click()
+    }
+    async addToCartByNumber(num: number): Promise<void>{
+        await this.product.nth(num).hover()
+        await this.addToCartHoverButton.nth(num).click()
     }
 
 }
