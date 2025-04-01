@@ -1,0 +1,5 @@
+export const SEARCHED_PRODUCTS_TITLE = 'Searched Products'
+export const SEARCH_BY_TEXT = 'blue'
+export const CATEGORY_TITLE = 'Category'
+export const WOMAN_DRESS_PRODUCTS = 'Women - Dress Products'
+export const MEN_T_SHIRTS_PRODUCTS = 'Men - Tshirts Products'
